@@ -76,7 +76,10 @@ var gestures = { // listeners for various event types.
 	},
 	wheel: function (event) {
 		log(event, "gesture", "state", "wheelDelta");
-	}
+	},
+  devicemotion: function (event) {
+    log(event, "gesture", "identifier", "state", "acceleration", "accelerationIncludingGravity");
+  }
 };
 
 function log(e) {
