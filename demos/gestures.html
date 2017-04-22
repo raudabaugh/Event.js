@@ -101,27 +101,36 @@ window.onload = function () {
 	///
 	var container = document.querySelector("#container");
 	var test = document.querySelector('#test');
-	for (var key in gestures) {
-		var input = document.createElement("input");
-		input.value = key;
-		input.type = "checkbox";
-		input.checked = true;
-		input.onchange = function() {
-			if (this.checked) {
-				test.addEventListener(this.value, gestures[this.value]);
-			} else {
-				test.removeEventListener(this.value, gestures[this.value]);
-			}
-		};
-		var span = document.createElement("span");
-		span.innerHTML = key;
-		var div = document.createElement("div");
-		div.appendChild(input);
-		div.appendChild(span);
-		container.appendChild(div);
-		/// this event is using eventjs
-		test.addEventListener(key, gestures[key]);
-	}
+  eventjs.add(window, "shake", function(event, self) {
+	  log(self.gesture, self.acceleration, self.accelerationIncludingGravity);
+  });
+  eventjs.add(window, "devicemotion", function(event, self) {
+	  log(self.gesture, self.acceleration, self.accelerationIncludingGravity);
+  });
+  eventjs.add(window, "wheel", function(event, self) {
+    log(self.gesture, self.state, self.wheelDelta);
+  });
+	// for (var key in gestures) {
+	// 	var input = document.createElement("input");
+	// 	input.value = key;
+	// 	input.type = "checkbox";
+	// 	input.checked = true;
+	// 	input.onchange = function() {
+	// 		if (this.checked) {
+	// 			test.addEventListener(this.value, gestures[this.value]);
+	// 		} else {
+	// 			test.removeEventListener(this.value, gestures[this.value]);
+	// 		}
+	// 	};
+	// 	var span = document.createElement("span");
+	// 	span.innerHTML = key;
+	// 	var div = document.createElement("div");
+	// 	div.appendChild(input);
+	// 	div.appendChild(span);
+	// 	container.appendChild(div);
+	// 	/// this event is using eventjs
+	// 	test.addEventListener(key, gestures[key]);
+	// }
 	/// these events are using eventjs
 	window.addEventListener("contextmenu", eventjs.prevent)
 	document.addEventListener("touchstart", eventjs.prevent)
