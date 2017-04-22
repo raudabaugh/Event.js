@@ -110,6 +110,9 @@ window.onload = function () {
   eventjs.add(window, "wheel", function(event, self) {
     log(self.gesture, self.state, self.wheelDelta);
   });
+  eventjs.add(window, "tap", function(event, self) {
+    log(self.gesture, self.fingers);
+  });
 	// for (var key in gestures) {
 	// 	var input = document.createElement("input");
 	// 	input.value = key;
